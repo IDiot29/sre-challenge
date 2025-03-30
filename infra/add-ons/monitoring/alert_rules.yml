@@ -1,0 +1,32 @@
+groups:
+  - name: pixelpet-alerts
+    rules:
+      - alert: PixelPetApiDown
+        expr: up{job="pixelpet"} == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "PixelPet API is not responding"
+          description: "The PixelPet API has been unreachable for more than 30 seconds."
+          runbook: "runbooks/api_down.md"
+
+      - alert: HighMemoryUsage
+        expr: process_resident_memory_bytes > 500000000
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory usage detected"
+          description: "The application is consuming more than 500MB of memory."
+          runbook: "runbooks/high_memory_usage.md"
+
+      - alert: HighCPUUsage
+        expr: rate(process_cpu_seconds_total[1m]) > 0.8
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU usage detected"
+          description: "The application is using more than 80% CPU for over 1 minute."
+          runbook: "runbooks/high_cpu_usage.md"
