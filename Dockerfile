@@ -1,20 +1,14 @@
-# Choose your base image
-FROM node:18-alpine
+FROM golang:1.24-alpine AS builder
+RUN apk update && apk add --no-cache git ca-certificates
 
-# Set working directory
 WORKDIR /app
+COPY src/ .
+RUN go mod download
+RUN go build -o /app/pixelpet
 
-# Add your build steps:
-# - Copy package files
-# - Install dependencies
-# - Copy application code
-# - Set up configuration
-
-# Configure:
-# - Environment variables
-# - Health checks
-# - Exposed ports
-# - Security considerations
-
-# Define your startup command
-CMD ["echo", "Replace with your start command"]
+FROM alpine:3.20
+WORKDIR /app
+RUN apk add --no-cache curl
+COPY --from=builder /app/pixelpet /app/pixelpet
+EXPOSE 8080
+ENTRYPOINT ["/app/pixelpet"]
