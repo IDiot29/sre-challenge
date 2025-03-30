@@ -6,10 +6,10 @@ on:
   pull_request:
     branches: [ main ]
 
-    env:
-      MONGODB_URI: mongodb://localhost:27017
-      tf_version: '1.9.5'
-      tg_version: '0.67.0'
+env:
+  MONGODB_URI: mongodb://localhost:27017
+  tf_version: '1.9.5'
+  tg_version: '0.67.0'
 
 jobs:
   build-and-test:
