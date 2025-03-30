@@ -1,0 +1,38 @@
+
+# Local .terraform directories
+.terraform/
+
+# Terraform State files
+*.tfstate
+*.tfstate.*
+
+# backend and providers
+backend.tf
+provider.tf
+
+# locals file
+locals.tf
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Ignore override files as they are usually used to override resources locally.
+# These are not needed in your source control.
+*.tfvars
+*.tfvars.json
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+
+# Sensitive data files
+*.auto.tfvars
+*.auto.tfvars.json
+
+# Lock file to prevent concurrent modifications
+.terraform.lock.hcl
+
+# plan output
+tfplan
+
